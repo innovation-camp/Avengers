@@ -26,8 +26,9 @@ public class Scheduler {
 //
 //            // 댓글이 0인 게시글 삭제
 //            logger.info("게시글<" + boardList[i].name + ">이 삭제되었습니다.")
-//            boardList[i].delete();
-//
+//            if (boardList[i].comments.length == 0) {
+//              boardList[i].delete();
+//          }
 //        }
 //    }
 }
