@@ -4,6 +4,8 @@ import com.example.intermediate.controller.response.ResponseDto;
 import com.example.intermediate.controller.request.CommentRequestDto;
 import com.example.intermediate.service.CommentService;
 import javax.servlet.http.HttpServletRequest;
+
+import com.sparta.avengers.account.controller.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

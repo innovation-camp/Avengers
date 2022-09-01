@@ -7,6 +7,8 @@ import com.example.intermediate.service.MemberService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+
+import com.sparta.avengers.account.controller.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,10 +34,6 @@ public class MemberController {
         return memberService.login(requestDto, response);
     }
 
-//  @RequestMapping(value = "/api/auth/member/reissue", method = RequestMethod.POST)
-//  public ResponseDto<?> reissue(HttpServletRequest request, HttpServletResponse response) {
-//    return memberService.reissue(request, response);
-//  }
 
     @RequestMapping(value = "/api/auth/member/logout", method = RequestMethod.POST)
     public ResponseDto<?> logout(HttpServletRequest request) {

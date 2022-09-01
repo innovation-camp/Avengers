@@ -7,6 +7,14 @@ import com.example.intermediate.domain.*;
 import com.example.intermediate.jwt.TokenProvider;
 import com.example.intermediate.repository.RecommentRepository;
 import com.example.intermediate.repository.RecommentlikeRepository;
+import com.sparta.avengers.account.controller.domain.Comment;
+import com.sparta.avengers.account.controller.domain.Member;
+import com.sparta.avengers.account.controller.domain.Recomment;
+import com.sparta.avengers.account.controller.domain.Recommentlike;
+import com.sparta.avengers.account.controller.request.CommentRequestDto;
+import com.sparta.avengers.account.controller.response.CommentResponseDto;
+import com.sparta.avengers.account.controller.response.ResponseDto;
+import com.sparta.avengers.account.repository.RecommentlikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,28 +79,6 @@ public class RecommentService {
 
 
 
-
-    /*@Transactional(readOnly = true)
-    public ResponseDto<?> getAllCommentsByPost(Long postId) {
-        Post post = postService.isPresentPost(postId);
-        if (null == post) {
-            return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
-        }
-        List<Comment> commentList = commentRepository.findAllByPost(post);
-        List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
-        for (Comment comment : commentList) {
-            commentResponseDtoList.add(
-                    CommentResponseDto.builder()
-                            .id(comment.getId())
-                            .author(comment.getMember().getNickname())
-                            .content(comment.getContent())
-                            .createdAt(comment.getCreatedAt())
-                            .modifiedAt(comment.getModifiedAt())
-                            .build()
-            );
-        }
-        return ResponseDto.success(commentResponseDtoList);
-    }*/
 
     @Transactional
     public ResponseDto<?> updateRecomment(Long id, CommentRequestDto requestDto, HttpServletRequest request) {
@@ -209,7 +195,7 @@ public class RecommentService {
                 break;
             }
         }
-        if(check==false)
+        if(!check)
         {
             recomment.pushLike();
             System.out.println("좋아요.");

@@ -1,6 +1,5 @@
 package com.sparta.avengers.account.controller.request;
 
-import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,12 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginRequestDto {
-
-    @NotBlank
-    private String nickname;
-
-    @NotBlank
-    private String password;
-
+public class CommentRequestDto {
+    private Long postId;
+    private String content;
 }

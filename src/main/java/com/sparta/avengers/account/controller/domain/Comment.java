@@ -1,6 +1,7 @@
 package com.sparta.avengers.account.controller.domain;
 
 import com.example.intermediate.controller.request.CommentRequestDto;
+import com.sparta.avengers.account.controller.request.CommentRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
