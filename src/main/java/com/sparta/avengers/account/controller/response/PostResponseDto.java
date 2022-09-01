@@ -21,5 +21,5 @@ public class PostResponseDto {
     private Long postLikeCount;
     private List<CommentResponseDto> commentResponseDtoList;
     private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
+    private LocalDateTime updatedAt;
 }

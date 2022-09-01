@@ -67,10 +67,10 @@ public class CommentService {
         return ResponseDto.success(
                 CommentResponseDto.builder()
                         .id(comment.getId())
-                        .author(comment.getMember().getNickname())
+                        .author(comment.getMember().getName())
                         .content(comment.getContent())
                         .createdAt(comment.getCreatedAt())
-                        .modifiedAt(comment.getModifiedAt())
+                        .updatedAt(comment.getUpdatedAt())
                         .build()
         );
     }
@@ -90,11 +90,11 @@ public class CommentService {
             commentResponseDtoList.add(
                     CommentResponseDto.builder()
                             .id(comment.getId())
-                            .author(comment.getMember().getNickname())
+                            .author(comment.getMember().getName())
                             .content(comment.getContent())
                             .recommentResponseDtos(recommentByComment(comment,comment.getMember()))
                             .createdAt(comment.getCreatedAt())
-                            .modifiedAt(comment.getModifiedAt())
+                            .updatedAt(comment.getUpdatedAt())
                             .build()
             );
         }
@@ -136,10 +136,10 @@ public class CommentService {
         return ResponseDto.success(
                 CommentResponseDto.builder()
                         .id(comment.getId())
-                        .author(comment.getMember().getNickname())
+                        .author(comment.getMember().getName())
                         .content(comment.getContent())
                         .createdAt(comment.getCreatedAt())
-                        .modifiedAt(comment.getModifiedAt())
+                        .updatedAt(comment.getUpdatedAt())
                         .build()
         );
     }
@@ -199,10 +199,10 @@ public class CommentService {
                     RecommentResponseDto
                             .builder()
                             .id(recomment.getId())
-                            .author(member.getNickname())
+                            .author(member.getName())
                             .content(recomment.getContent())
                             .createdAt(recomment.getCreatedAt())
-                            .modifiedAt(recomment.getModifiedAt())
+                            .updatedAt(recomment.getUpdatedAt())
                             .build()
             );
         }

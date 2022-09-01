@@ -18,5 +18,5 @@ public class ReplyResponseDto {
     private String content;
     private Long replyLikeCount;
     private LocalDateTime createdAt;
-    private LocalDateTime modifiedAt;
+    private LocalDateTime updatedAt;
 }

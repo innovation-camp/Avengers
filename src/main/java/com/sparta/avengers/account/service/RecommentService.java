@@ -33,6 +33,7 @@ public class RecommentService {
     private final TokenProvider tokenProvider;
 
 
+    //Exception AccessToken이 없거나, 유효하지 않은 Token일 때 ‘로그인이 필요합니다.’를 200 정상 응답으로 나타내기
     @Transactional
     public ResponseDto<?> createRecomment(CommentRequestDto requestDto, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
@@ -68,10 +69,10 @@ public class RecommentService {
         return ResponseDto.success(
                 CommentResponseDto.builder()
                         .id(recomment.getId())
-                        .author(recomment.getMember().getNickname())
+                        .author(recomment.getMember().getName())
                         .content(recomment.getContent())
                         .createdAt(recomment.getCreatedAt())
-                        .modifiedAt(recomment.getModifiedAt())
+                        .updatedAt(recomment.getUpdatedAt())
                         .build()
         );
     }
@@ -111,10 +112,10 @@ public class RecommentService {
         return ResponseDto.success(
                 CommentResponseDto.builder()
                         .id(recomment.getId())
-                        .author(recomment.getMember().getNickname())
+                        .author(recomment.getMember().getName())
                         .content(recomment.getContent())
                         .createdAt(recomment.getCreatedAt())
-                        .modifiedAt(recomment.getModifiedAt())
+                        .updatedAt(recomment.getUpdatedAt())
                         .build()
         );
     }

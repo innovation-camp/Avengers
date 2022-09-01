@@ -66,10 +66,10 @@ public class PostService {
                     .id(post.getId())
                     .title(post.getTitle())
                     .content(post.getContent())
-                    .author(post.getMember().getNickname())
+                    .author(post.getMember().getName())
                     .Url(post.getUrl())
                     .createdAt(post.getCreatedAt())
-                    .modifiedAt(post.getModifiedAt())
+                    .updatedAt(post.getUpdatedAt())
                     .build()
     );
   }
@@ -89,10 +89,10 @@ public class PostService {
       commentResponseDtoList.add(
               CommentResponseDto.builder()
                       .id(comment.getId())
-                      .author(comment.getMember().getNickname())
+                      .author(comment.getMember().getName())
                       .content(comment.getContent())
                       .createdAt(comment.getCreatedAt())
-                      .modifiedAt(comment.getModifiedAt())
+                      .updatedAt(comment.getUpdatedAt())
                       .build()
       );
     }
@@ -103,16 +103,16 @@ public class PostService {
                     .title(post.getTitle())
                     .content(post.getContent())
                     .commentResponseDtoList(commentResponseDtoList)
-                    .author(post.getMember().getNickname())
+                    .author(post.getMember().getName())
                     .createdAt(post.getCreatedAt())
-                    .modifiedAt(post.getModifiedAt())
+                    .updatedAt(post.getUpdatedAt())
                     .build()
     );
   }
 
   @Transactional(readOnly = true)
   public ResponseDto<?> getAllPost() {
-    List<Post> postList = postRepository.findAllByOrderByModifiedAtDesc();
+    List<Post> postList = postRepository.findAllByOrderByUpdatedAtDesc();
     List<PostResponseDto> responseDtos = new ArrayList<PostResponseDto>();
     for (Post post : postList) {
       responseDtos.add(
@@ -120,10 +120,10 @@ public class PostService {
                       .id(post.getId())
                       .title(post.getTitle())
                       .content(post.getContent())
-                      .author(post.getMember().getNickname())
+                      .author(post.getMember().getName())
                       .commentResponseDtoList(commentByPost(post,post.getMember()))
                       .createdAt(post.getCreatedAt())
-                      .modifiedAt(post.getModifiedAt())
+                      .updatedAt(post.getUpdatedAt())
                       .build()
       );
     }
@@ -215,10 +215,10 @@ public class PostService {
               CommentResponseDto
                       .builder()
                       .id(comment.getId())
-                      .author(member.getNickname())
+                      .author(member.getName())
                       .content(comment.getContent())
                       .createdAt(comment.getCreatedAt())
-                      .modifiedAt(comment.getModifiedAt())
+                      .updatedAt(comment.getUpdatedAt())
                       .build()
       );
     }
