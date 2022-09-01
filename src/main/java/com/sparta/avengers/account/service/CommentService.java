@@ -13,6 +13,7 @@ import com.sparta.avengers.account.controller.domain.Comment;
 import com.sparta.avengers.account.controller.domain.Member;
 import com.sparta.avengers.account.controller.domain.Post;
 import com.sparta.avengers.account.controller.request.CommentRequestDto;
+import com.sparta.avengers.account.controller.response.CommentResponseDto;
 import com.sparta.avengers.account.controller.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

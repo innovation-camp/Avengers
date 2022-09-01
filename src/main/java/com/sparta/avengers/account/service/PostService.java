@@ -9,6 +9,13 @@ import com.example.intermediate.jwt.TokenProvider;
 import com.example.intermediate.repository.CommentRepository;
 import com.example.intermediate.repository.PostRepository;
 import com.example.intermediate.repository.PostlikeRepository;
+import com.sparta.avengers.account.controller.domain.Comment;
+import com.sparta.avengers.account.controller.domain.Member;
+import com.sparta.avengers.account.controller.domain.Post;
+import com.sparta.avengers.account.controller.domain.Postlike;
+import com.sparta.avengers.account.controller.request.PostRequestDto;
+import com.sparta.avengers.account.controller.response.CommentResponseDto;
+import com.sparta.avengers.account.controller.response.ResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +37,7 @@ public class PostService {
   private final TokenProvider tokenProvider;
 
   @Transactional
-  public ResponseDto<?> createPost(MultipartFile multipartFile,PostRequestDto requestDto, HttpServletRequest request) {
+  public ResponseDto<?> createPost(MultipartFile multipartFile, PostRequestDto requestDto, HttpServletRequest request) {
     if (null == request.getHeader("Refresh-Token")) {
       return ResponseDto.fail("MEMBER_NOT_FOUND",
               "로그인이 필요합니다.");
@@ -253,7 +260,7 @@ public class PostService {
         break;
       }
     }
-    if(check==false)
+    if(!check)
     {
       post.pushLike();
       System.out.println("좋아요.");

@@ -9,6 +9,7 @@ import com.example.intermediate.domain.Member;
 import com.example.intermediate.jwt.TokenProvider;
 import com.example.intermediate.repository.MemberRepository;
 import com.sparta.avengers.account.controller.domain.Member;
+import com.sparta.avengers.account.controller.request.LoginRequestDto;
 import com.sparta.avengers.account.controller.request.MemberRequestDto;
 import com.sparta.avengers.account.controller.request.TokenDto;
 import com.sparta.avengers.account.controller.response.MemberResponseDto;

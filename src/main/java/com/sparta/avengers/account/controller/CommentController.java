@@ -5,7 +5,9 @@ import com.example.intermediate.controller.request.CommentRequestDto;
 import com.example.intermediate.service.CommentService;
 import javax.servlet.http.HttpServletRequest;
 
+import com.sparta.avengers.account.controller.request.CommentRequestDto;
 import com.sparta.avengers.account.controller.response.ResponseDto;
+import com.sparta.avengers.account.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
