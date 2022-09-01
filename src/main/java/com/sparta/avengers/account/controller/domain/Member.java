@@ -27,7 +27,7 @@ public class Member extends Timestamped  {
     private String name;
 
     @OneToMany(mappedBy = "member",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<com.example.intermediate.domain.Post> posts;
+    private List<Board> boards;
 
     @Column(nullable = false)
     @JsonIgnore

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentRequestDto {
-    private Long postId;
+    private Long boardId;
     private String content;
+    private Long commentId;
 }

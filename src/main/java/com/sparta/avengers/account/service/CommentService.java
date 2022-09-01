@@ -1,20 +1,13 @@
 package com.sparta.avengers.account.service;
 
-import com.example.intermediate.controller.request.CommentRequestDto;
-import com.example.intermediate.controller.response.CommentResponseDto;
-import com.example.intermediate.controller.response.RecommentResponseDto;
-import com.example.intermediate.controller.response.ResponseDto;
-import com.example.intermediate.domain.*;
-import com.example.intermediate.jwt.TokenProvider;
-import com.example.intermediate.repository.CommentRepository;
-import com.example.intermediate.repository.CommentlikeRepository;
-import com.example.intermediate.repository.RecommentRepository;
 import com.sparta.avengers.account.controller.domain.Comment;
+import com.sparta.avengers.account.controller.domain.Commentlike;
 import com.sparta.avengers.account.controller.domain.Member;
-import com.sparta.avengers.account.controller.domain.Post;
+import com.sparta.avengers.account.controller.domain.Board;
 import com.sparta.avengers.account.controller.request.CommentRequestDto;
 import com.sparta.avengers.account.controller.response.CommentResponseDto;
 import com.sparta.avengers.account.controller.response.ResponseDto;
+import com.sparta.avengers.account.repository.CommentlikeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,9 +24,8 @@ public class CommentService {
     private final CommentRepository commentRepository;
     private final CommentlikeRepository commentlikeRepository;
 
-    private final RecommentRepository recommentRepository;
     private final TokenProvider tokenProvider;
-    private final PostService postService;
+    private final BoardService BoardService;
 
     @Transactional
     public ResponseDto<?> createComment(CommentRequestDto requestDto, HttpServletRequest request) {
@@ -51,15 +43,15 @@ public class CommentService {
         if (null == member) {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
-        //post는 requestbody로 전달받은 postid로 post객체 찾아서 comment 앤티티에 추가해줌. 그 때 id 공유
-        Post post = postService.isPresentPost(requestDto.getPostId());
-        if (null == post) {
+        //board는 requestbody로 전달받은 boardid로 board객체 찾아서 comment 앤티티에 추가해줌. 그 때 id 공유
+        Board board = boardService.isPresentBoard(requestDto.getBoardId());
+        if (null == board) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
         Comment comment = Comment.builder()
                 .member(member)
-                .post(post)
+                .board(board)
                 .content(requestDto.getContent())
                 .likenum(0)
                 .build();
@@ -76,14 +68,14 @@ public class CommentService {
     }
 
     @Transactional(readOnly = true)
-    public ResponseDto<?> getAllCommentsByPost(Long Id) {
-        Post post = postService.isPresentPost(Id);
-        System.out.println(post);
-        if (null == post) {
+    public ResponseDto<?> getAllCommentsByBoard(Long Id) {
+        Board board = boardService.isPresentBoard(Id);
+        System.out.println(board);
+        if (null == board) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
-        List<Comment> commentList = commentRepository.findAllByPost(post);
+        List<Comment> commentList = commentRepository.findAllByBoard(board);
         List<CommentResponseDto> commentResponseDtoList = new ArrayList<>();
 
         for (Comment comment : commentList) {
@@ -92,7 +84,6 @@ public class CommentService {
                             .id(comment.getId())
                             .author(comment.getMember().getName())
                             .content(comment.getContent())
-                            .recommentResponseDtos(recommentByComment(comment,comment.getMember()))
                             .createdAt(comment.getCreatedAt())
                             .updatedAt(comment.getUpdatedAt())
                             .build()
@@ -118,8 +109,8 @@ public class CommentService {
             return ResponseDto.fail("INVALID_TOKEN", "Token이 유효하지 않습니다.");
         }
 
-        Post post = postService.isPresentPost(requestDto.getPostId());
-        if (null == post) {
+        Board board = boardService.isPresentBoard(requestDto.getBoardId());
+        if (null == board) {
             return ResponseDto.fail("NOT_FOUND", "존재하지 않는 게시글 id 입니다.");
         }
 
@@ -188,28 +179,7 @@ public class CommentService {
         return tokenProvider.getMemberFromAuthentication();
     }
 
-    public List<RecommentResponseDto> recommentByComment(Comment comment,Member member)
-    {
-        List<Recomment> recommentList= recommentRepository.findAllByComment(comment);
-        List<RecommentResponseDto> recommentResponseDtos=new ArrayList<>();
 
-        for(Recomment recomment: recommentList)
-        {
-            recommentResponseDtos.add(
-                    RecommentResponseDto
-                            .builder()
-                            .id(recomment.getId())
-                            .author(member.getName())
-                            .content(recomment.getContent())
-                            .createdAt(recomment.getCreatedAt())
-                            .updatedAt(recomment.getUpdatedAt())
-                            .build()
-            );
-        }
-
-        return recommentResponseDtos;
-
-    }
     @Transactional
     public ResponseDto<?> likeComment(Long id, HttpServletRequest request) {
         if (null == request.getHeader("Refresh-Token")) {
@@ -243,7 +213,7 @@ public class CommentService {
                 break;
             }
         }
-        if(check==false)
+        if(!check)
         {
             comment.pushLike();
             System.out.println("좋아요.");

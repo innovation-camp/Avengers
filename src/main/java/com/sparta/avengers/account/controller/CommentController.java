@@ -19,7 +19,7 @@ public class CommentController {
 
     private final CommentService commentService;
 
-    @RequestMapping(value = "/api/auth/comment", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/auth/comment", method = RequestMethod.Board)
     public ResponseDto<?> createComment(@RequestBody CommentRequestDto requestDto,
                                         HttpServletRequest request) {
         return commentService.createComment(requestDto, request);
@@ -28,7 +28,7 @@ public class CommentController {
     @RequestMapping(value = "/api/comment/{id}", method = RequestMethod.GET)
     public ResponseDto<?> getAllComments(@PathVariable Long id) {
 
-        return commentService.getAllCommentsByPost(id);
+        return commentService.getAllCommentsByBoard(id);
     }
 
     @RequestMapping(value = "/api/auth/comment/{id}", method = RequestMethod.PUT)
@@ -43,7 +43,7 @@ public class CommentController {
         return commentService.deleteComment(id, request);
     }
 
-    @RequestMapping(value = "/api/auth/commentlike/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/auth/commentlike/{id}", method = RequestMethod.Board)
     public ResponseDto<?> likeComment(@PathVariable Long id,
                                       HttpServletRequest request) {
         return commentService.likeComment(id, request);

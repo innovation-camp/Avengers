@@ -13,12 +13,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PostResponseDto {
+public class BoardResponseDto {
     private Long id;
     private String title;
     private String content;
     private String author;
-    private Long postLikeCount;
+    private Long BoardLikeCount;
     private List<CommentResponseDto> commentResponseDtoList;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

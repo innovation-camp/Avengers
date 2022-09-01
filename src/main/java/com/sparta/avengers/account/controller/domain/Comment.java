@@ -1,6 +1,5 @@
 package com.sparta.avengers.account.controller.domain;
 
-import com.example.intermediate.controller.request.CommentRequestDto;
 import com.sparta.avengers.account.controller.request.CommentRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,12 +24,11 @@ public class Comment extends Timestamped {
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @JoinColumn(name = "post_id", nullable = false)
+    @JoinColumn(name = "board_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private com.example.intermediate.domain.Post post;
+    private Board board;
 
-    @OneToMany(mappedBy = "comment",fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<com.example.intermediate.domain.Recomment> recomments;
+
     @Column(nullable = false)
     private String content;
 

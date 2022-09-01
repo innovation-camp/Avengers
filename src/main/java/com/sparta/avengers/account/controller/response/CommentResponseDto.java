@@ -19,5 +19,4 @@ public class CommentResponseDto {
     private Long commentLikeCount;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<ReplyResponseDto> replyResponseDtoList;
 }

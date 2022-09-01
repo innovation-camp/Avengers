@@ -1,12 +1,12 @@
 package com.sparta.avengers.account.controller;
 
-import com.example.intermediate.controller.request.PostRequestDto;
+import com.example.intermediate.controller.request.boardRequestDto;
 import com.example.intermediate.controller.response.ResponseDto;
-import com.example.intermediate.service.PostService;
+import com.example.intermediate.service.BoardService;
 import javax.servlet.http.HttpServletRequest;
 
-import com.sparta.avengers.account.controller.request.PostRequestDto;
-import com.sparta.avengers.account.service.PostService;
+import com.sparta.avengers.account.controller.request.BoardRequestDto;
+import com.sparta.avengers.account.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,41 +16,41 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-public class PostController<ResponseDto> {
+public class BoardController<ResponseDto> {
 
-    private final PostService postService;
+    private final BoardService boardService;
 
-    //POST
-    @RequestMapping(value = "/api/auth/post", method = RequestMethod.POST)
-    public ResponseDto<?> createPost(@RequestBody PostRequestDto requestDto,
+    //Board
+    @RequestMapping(value = "/api/auth/board", method = RequestMethod.Board)
+    public ResponseDto<?> createBoard(@RequestBody BoardRequestDto requestDto,
                                      HttpServletRequest request) {
-        return postService.createPost(requestDto, request);
+        return boardService.createBoard(requestDto, request);
     }
 
     //Get id
-    @RequestMapping(value = "/api/post/{id}", method = RequestMethod.GET)
-    public ResponseDto<?> getPost(@PathVariable Long id) {
-        return postService.getPost(id);
+    @RequestMapping(value = "/api/board/{id}", method = RequestMethod.GET)
+    public ResponseDto<?> getBoard(@PathVariable Long id) {
+        return boardService.getBoard(id);
     }
 
     //Get
-    @RequestMapping(value = "/api/post", method = RequestMethod.GET)
-    public ResponseDto<?> getAllPosts() {
-        return postService.getAllPost();
+    @RequestMapping(value = "/api/board", method = RequestMethod.GET)
+    public ResponseDto<?> getAllBoards() {
+        return boardService.getAllBoard();
     }
 
     //Put id
-    @RequestMapping(value = "/api/auth/post/{id}", method = RequestMethod.PUT)
-    public ResponseDto<?> updatePost(@PathVariable Long id, @RequestBody PostRequestDto postRequestDto,
+    @RequestMapping(value = "/api/auth/Board/{id}", method = RequestMethod.PUT)
+    public ResponseDto<?> updateBoard(@PathVariable Long id, @RequestBody BoardRequestDto BoardRequestDto,
                                      HttpServletRequest request) {
-        return postService.updatePost(id, postRequestDto, request);
+        return BoardService.updateBoard(id, BoardRequestDto, request);
     }
 
     //Delete id
-    @RequestMapping(value = "/api/auth/post/{id}", method = RequestMethod.DELETE)
-    public ResponseDto<?> deletePost(@PathVariable Long id,
+    @RequestMapping(value = "/api/auth/Board/{id}", method = RequestMethod.DELETE)
+    public ResponseDto<?> deleteBoard(@PathVariable Long id,
                                      HttpServletRequest request) {
-        return postService.deletePost(id, request);
+        return BoardService.deleteBoard(id, request);
     }
 
 }

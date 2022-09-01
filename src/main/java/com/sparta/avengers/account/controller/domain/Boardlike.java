@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Recommentlike{
+public class Boardlike{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,9 +23,9 @@ public class Recommentlike{
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @JoinColumn(name = "recomment_id", nullable = false)
+    @JoinColumn(name = "board_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
-    private com.example.intermediate.domain.Recomment recomment;
+    private Board board;
 
     public boolean validateMember(Member member) {
         return !this.member.equals(member);
