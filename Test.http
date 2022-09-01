@@ -1,0 +1,22 @@
+GET http://localhost:8080/api/issue/token
+Accept: application/json
+Refresh-Token: eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzb295b29uIiwiZXhwIjoxNjYyMDEyNTcxLCJpYXQiOjE2NjIwMTI0NzF9.dfKN7djJ9BSKzigYzoyG-WEp89olg6N0AqOrmcil5QE
+
+###
+POST http://localhost:8080/api/account/login
+Content-Type: application/json
+
+{
+  "userId": "sooyoon",
+  "password": "sy1234"
+}
+
+###
+POST http://localhost:8080/api/account/signup
+Content-Type: application/json
+
+{
+  "userId": "sooyoon",
+  "password": "sy1234"
+}
+###
